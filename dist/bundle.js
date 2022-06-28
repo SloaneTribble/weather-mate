@@ -528,6 +528,67 @@ function styleTagTransform(css, styleElement) {
 
 module.exports = styleTagTransform;
 
+/***/ }),
+
+/***/ "./src/get-weather.js":
+/*!****************************!*\
+  !*** ./src/get-weather.js ***!
+  \****************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "getWeather": () => (/* binding */ getWeather)
+/* harmony export */ });
+/**
+ * Allow user to choose temperature units.  Choices = imperial and metric;
+ * example:
+ * "https://api.openweathermap.org/data/2.5/weather?q=London,uk&APPID=127129261617cbfa5cf75835b41e98fa&units=imperial"
+ */
+
+async function getWeather() {
+  const response = await fetch(
+    "https://api.openweathermap.org/data/2.5/weather?q=ojai,california&APPID=127129261617cbfa5cf75835b41e98fa&units=imperial",
+    { mode: "cors" }
+  );
+
+  const responseData = await response.json();
+
+  console.log(responseData);
+
+  const overview = responseData.weather[0].description;
+  console.log(`overview: ${overview}`);
+
+  //   const weather = {
+  //     description: responseData.weather[0].main,
+  //   }
+
+  const latitude = responseData.coord.lat;
+
+  const longitude = responseData.coord.lon;
+
+  getForecast(latitude, longitude);
+
+  return;
+}
+
+async function getForecast(latitude, longitude) {
+  const forecast = await fetch(
+    `https://api.openweathermap.org/data/2.5/forecast?lat=${latitude}&lon=${longitude}&appid=127129261617cbfa5cf75835b41e98fa&units=imperial`,
+    { mode: "cors" }
+  );
+
+  const forecastData = await forecast.json();
+
+  const dateList = forecastData.list;
+  for (let i = 0; i < dateList.length; i += 8) {
+    console.log(dateList[i]);
+  }
+}
+
+
+
+
 /***/ })
 
 /******/ 	});
@@ -611,19 +672,12 @@ var __webpack_exports__ = {};
   \**********************/
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _style_css__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./style.css */ "./src/style.css");
+/* harmony import */ var _get_weather__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./get-weather */ "./src/get-weather.js");
 
 
-function component() {
-  const element = document.createElement("div");
 
-  // Lodash, now imported by this script
-  element.innerText = "hey";
-  element.classList.add("hello");
 
-  return element;
-}
-
-document.body.appendChild(component());
+(0,_get_weather__WEBPACK_IMPORTED_MODULE_1__.getWeather)();
 
 })();
 

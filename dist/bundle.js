@@ -538,6 +538,7 @@ module.exports = styleTagTransform;
 
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "getForecast": () => (/* binding */ getForecast),
 /* harmony export */   "getWeather": () => (/* binding */ getWeather)
 /* harmony export */ });
 /**
@@ -567,8 +568,6 @@ async function getWeather() {
 
   const longitude = responseData.coord.lon;
 
-  getForecast(latitude, longitude);
-
   return;
 }
 
@@ -581,9 +580,26 @@ async function getForecast(latitude, longitude) {
   const forecastData = await forecast.json();
 
   const dateList = forecastData.list;
+
+  // An array for date objects
+  const dateArray = [];
   for (let i = 0; i < dateList.length; i += 8) {
-    console.log(dateList[i]);
+    const currentDate = dateList[i];
+
+    const description = currentDate.weather[0].description;
+
+    const temp = currentDate.main.temp;
+
+    const feelsLike = currentDate.main.feels_like;
+
+    const tempMin = currentDate.main.temp_min;
+
+    const tempMax = currentDate.main.temp_max;
+
+    dateArray.push({ description, temp, feelsLike, tempMin, tempMax });
   }
+
+  return dateArray;
 }
 
 

@@ -3936,6 +3936,39 @@ module.exports = styleTagTransform;
 
 /***/ }),
 
+/***/ "./src/clear-display.js":
+/*!******************************!*\
+  !*** ./src/clear-display.js ***!
+  \******************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "clearDisplay": () => (/* binding */ clearDisplay)
+/* harmony export */ });
+const removeChildren = function removeAllChildren(parent) {
+  while (parent.firstChild) {
+    parent.removeChild(parent.firstChild);
+  }
+  return;
+};
+
+const clearDisplay = function clearBothDisplays() {
+  const dailyDisplay = document.querySelector(".daily-forecast-container");
+
+  const fiveDayDisplay = document.querySelector(".five-day-forecast-container");
+
+  removeChildren(dailyDisplay);
+  removeChildren(fiveDayDisplay);
+
+  return;
+};
+
+
+
+
+/***/ }),
+
 /***/ "./src/display-daily.js":
 /*!******************************!*\
   !*** ./src/display-daily.js ***!
@@ -4307,9 +4340,12 @@ var __webpack_exports__ = {};
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _style_css__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./style.css */ "./src/style.css");
 /* harmony import */ var _fill_page__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./fill-page */ "./src/fill-page.js");
-/* harmony import */ var _get_weather__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./get-weather */ "./src/get-weather.js");
-/* harmony import */ var _display_daily__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./display-daily */ "./src/display-daily.js");
-/* harmony import */ var _display_five_day__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./display-five-day */ "./src/display-five-day.js");
+/* harmony import */ var _clear_display__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./clear-display */ "./src/clear-display.js");
+/* harmony import */ var _get_weather__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./get-weather */ "./src/get-weather.js");
+/* harmony import */ var _display_daily__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./display-daily */ "./src/display-daily.js");
+/* harmony import */ var _display_five_day__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./display-five-day */ "./src/display-five-day.js");
+
+
 
 
 
@@ -4330,14 +4366,16 @@ form.addEventListener("submit", (e) => {
 
 const submitButton = document.querySelector(".submit-button");
 submitButton.addEventListener("click", () => {
+  (0,_clear_display__WEBPACK_IMPORTED_MODULE_2__.clearDisplay)();
+
   const locationField = document.querySelector(".location");
   const location = locationField.value;
   console.log(location);
 
-  const dailyWeather = (0,_get_weather__WEBPACK_IMPORTED_MODULE_2__.getWeather)(location);
+  const dailyWeather = (0,_get_weather__WEBPACK_IMPORTED_MODULE_3__.getWeather)(location);
 
   // Use daily forecast object to create display
-  dailyWeather.then((weatherObject) => (0,_display_daily__WEBPACK_IMPORTED_MODULE_3__.displayDaily)(weatherObject));
+  dailyWeather.then((weatherObject) => (0,_display_daily__WEBPACK_IMPORTED_MODULE_4__.displayDaily)(weatherObject));
 
   /**
    * Extract latitude and longitude from daily forecast object, use as
@@ -4346,7 +4384,7 @@ submitButton.addEventListener("click", () => {
   const forecast = dailyWeather.then((weatherObject) => {
     const lat = weatherObject.latitude;
     const long = weatherObject.longitude;
-    const forecastArray = (0,_get_weather__WEBPACK_IMPORTED_MODULE_2__.getForecast)(lat, long);
+    const forecastArray = (0,_get_weather__WEBPACK_IMPORTED_MODULE_3__.getForecast)(lat, long);
 
     // returns an array of 5 objects, each representing a day's forecast
     return forecastArray;
@@ -4355,7 +4393,7 @@ submitButton.addEventListener("click", () => {
   /**
    * Use array of forecast objects to display 5-day forecast
    */
-  forecast.then((result) => (0,_display_five_day__WEBPACK_IMPORTED_MODULE_4__.displayFiveDay)(result));
+  forecast.then((result) => (0,_display_five_day__WEBPACK_IMPORTED_MODULE_5__.displayFiveDay)(result));
 });
 
 })();

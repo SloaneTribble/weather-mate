@@ -557,18 +557,21 @@ async function getWeather() {
 
   console.log(responseData);
 
-  const overview = responseData.weather[0].description;
-  console.log(`overview: ${overview}`);
-
-  //   const weather = {
-  //     description: responseData.weather[0].main,
-  //   }
-
   const latitude = responseData.coord.lat;
 
   const longitude = responseData.coord.lon;
 
-  return;
+  const overview = responseData.weather[0].description;
+
+  const avgTemp = responseData.main.temp;
+
+  const feel = responseData.main.feels_like;
+
+  const minTemp = responseData.main.temp_min;
+
+  const maxTemp = responseData.main.temp_max;
+
+  return { latitude, longitude, overview, avgTemp, feel, minTemp, maxTemp };
 }
 
 async function getForecast(latitude, longitude) {
@@ -693,7 +696,25 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-(0,_get_weather__WEBPACK_IMPORTED_MODULE_1__.getWeather)();
+const dailyWeather = (0,_get_weather__WEBPACK_IMPORTED_MODULE_1__.getWeather)();
+
+/**
+ * Extract latitude and longitude from daily forecast object, use as
+ * arguments to search for 5-day forecast
+ */
+const forecast = dailyWeather.then((weatherObject) => {
+  const lat = weatherObject.latitude;
+  const long = weatherObject.longitude;
+  const forecastArray = (0,_get_weather__WEBPACK_IMPORTED_MODULE_1__.getForecast)(lat, long);
+
+  // returns an array of objects, each with a day's forecast
+  return forecastArray;
+});
+
+/**
+ * Use
+ */
+forecast.then((result) => console.log(result[0]));
 
 })();
 

@@ -14,18 +14,21 @@ async function getWeather() {
 
   console.log(responseData);
 
-  const overview = responseData.weather[0].description;
-  console.log(`overview: ${overview}`);
-
-  //   const weather = {
-  //     description: responseData.weather[0].main,
-  //   }
-
   const latitude = responseData.coord.lat;
 
   const longitude = responseData.coord.lon;
 
-  return;
+  const overview = responseData.weather[0].description;
+
+  const avgTemp = responseData.main.temp;
+
+  const feel = responseData.main.feels_like;
+
+  const minTemp = responseData.main.temp_min;
+
+  const maxTemp = responseData.main.temp_max;
+
+  return { latitude, longitude, overview, avgTemp, feel, minTemp, maxTemp };
 }
 
 async function getForecast(latitude, longitude) {

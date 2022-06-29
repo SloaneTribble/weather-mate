@@ -21,7 +21,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_1___default()((_node_modules_css_loader_dist_runtime_sourceMaps_js__WEBPACK_IMPORTED_MODULE_0___default()));
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "", "",{"version":3,"sources":[],"names":[],"mappings":"","sourceRoot":""}]);
+___CSS_LOADER_EXPORT___.push([module.id, ".header{\n    height: 1rem;\n    background-color: blue;\n}\n\n.daily-forecast-container{\n    background-color: beige;\n}\n\n.five-day-forecast-container{\n    background-color:aquamarine;\n}", "",{"version":3,"sources":["webpack://./src/style.css"],"names":[],"mappings":"AAAA;IACI,YAAY;IACZ,sBAAsB;AAC1B;;AAEA;IACI,uBAAuB;AAC3B;;AAEA;IACI,2BAA2B;AAC/B","sourcesContent":[".header{\n    height: 1rem;\n    background-color: blue;\n}\n\n.daily-forecast-container{\n    background-color: beige;\n}\n\n.five-day-forecast-container{\n    background-color:aquamarine;\n}"],"sourceRoot":""}]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -3954,8 +3954,7 @@ __webpack_require__.r(__webpack_exports__);
  * Append those elements to the daily-forecast-container element
  */
 const displayDaily = function displayDailyForecast(forecastObject) {
-  const container = document.createElement("div");
-  container.classList.add("daily-forecast-container");
+  const container = document.querySelector(".daily-forecast-container");
 
   const description = document.createElement("div");
   description.textContent = forecastObject.overview;
@@ -4001,7 +4000,9 @@ __webpack_require__.r(__webpack_exports__);
  * properties to populate a series of divs.  Append those divs to a container div
  */
 const displayFiveDay = function displayFiveDayForecast(forecastArray) {
-  const fiveDayContainer = document.createElement("div");
+  const fiveDayContainer = document.querySelector(
+    ".five-day-forecast-container"
+  );
 
   for (let forecast of forecastArray) {
     const dayContainer = document.createElement("div");
@@ -4026,6 +4027,65 @@ const displayFiveDay = function displayFiveDayForecast(forecastArray) {
   document.body.appendChild(fiveDayContainer);
 
   return;
+};
+
+
+
+
+/***/ }),
+
+/***/ "./src/fill-page.js":
+/*!**************************!*\
+  !*** ./src/fill-page.js ***!
+  \**************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "fillPage": () => (/* binding */ fillPage)
+/* harmony export */ });
+const fillPage = function populateBodyWithDivs() {
+  const mainContainer = pageContainerMaker();
+
+  const header = makeHeader();
+
+  const daily = makeDaily();
+
+  const fiveDay = makeFiveDay();
+
+  mainContainer.appendChild(header);
+  mainContainer.appendChild(daily);
+  mainContainer.appendChild(fiveDay);
+
+  document.body.appendChild(mainContainer);
+};
+
+const pageContainerMaker = function makeMainContainer() {
+  const pageContainer = document.createElement("div");
+  pageContainer.classList.add("main-container");
+
+  return pageContainer;
+};
+
+const makeHeader = function headerMaker() {
+  const header = document.createElement("div");
+  header.classList.add("header");
+
+  return header;
+};
+
+const makeDaily = function makeDailyForecastContainer() {
+  const dailyContainer = document.createElement("div");
+  dailyContainer.classList.add("daily-forecast-container");
+
+  return dailyContainer;
+};
+
+const makeFiveDay = function makeFiveDayForecastContainer() {
+  const fiveDayContainer = document.createElement("div");
+  fiveDayContainer.classList.add("five-day-forecast-container");
+
+  return fiveDayContainer;
 };
 
 
@@ -4221,9 +4281,10 @@ var __webpack_exports__ = {};
   \**********************/
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _style_css__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./style.css */ "./src/style.css");
-/* harmony import */ var _get_weather__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./get-weather */ "./src/get-weather.js");
-/* harmony import */ var _display_daily__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./display-daily */ "./src/display-daily.js");
-/* harmony import */ var _display_five_day__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./display-five-day */ "./src/display-five-day.js");
+/* harmony import */ var _fill_page__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./fill-page */ "./src/fill-page.js");
+/* harmony import */ var _get_weather__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./get-weather */ "./src/get-weather.js");
+/* harmony import */ var _display_daily__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./display-daily */ "./src/display-daily.js");
+/* harmony import */ var _display_five_day__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./display-five-day */ "./src/display-five-day.js");
 
 
 
@@ -4232,10 +4293,14 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-const dailyWeather = (0,_get_weather__WEBPACK_IMPORTED_MODULE_1__.getWeather)("santa cruz");
+
+
+(0,_fill_page__WEBPACK_IMPORTED_MODULE_1__.fillPage)();
+
+const dailyWeather = (0,_get_weather__WEBPACK_IMPORTED_MODULE_2__.getWeather)("santa cruz");
 
 // Use daily forecast object to create display
-dailyWeather.then((weatherObject) => (0,_display_daily__WEBPACK_IMPORTED_MODULE_2__.displayDaily)(weatherObject));
+dailyWeather.then((weatherObject) => (0,_display_daily__WEBPACK_IMPORTED_MODULE_3__.displayDaily)(weatherObject));
 
 /**
  * Extract latitude and longitude from daily forecast object, use as
@@ -4244,7 +4309,7 @@ dailyWeather.then((weatherObject) => (0,_display_daily__WEBPACK_IMPORTED_MODULE_
 const forecast = dailyWeather.then((weatherObject) => {
   const lat = weatherObject.latitude;
   const long = weatherObject.longitude;
-  const forecastArray = (0,_get_weather__WEBPACK_IMPORTED_MODULE_1__.getForecast)(lat, long);
+  const forecastArray = (0,_get_weather__WEBPACK_IMPORTED_MODULE_2__.getForecast)(lat, long);
 
   // returns an array of 5 objects, each representing a day's forecast
   return forecastArray;
@@ -4253,7 +4318,7 @@ const forecast = dailyWeather.then((weatherObject) => {
 /**
  * Use array of forecast objects to display 5-day forecast
  */
-forecast.then((result) => (0,_display_five_day__WEBPACK_IMPORTED_MODULE_3__.displayFiveDay)(result));
+forecast.then((result) => (0,_display_five_day__WEBPACK_IMPORTED_MODULE_4__.displayFiveDay)(result));
 
 })();
 

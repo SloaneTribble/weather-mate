@@ -3,7 +3,9 @@
  * properties to populate a series of divs.  Append those divs to a container div
  */
 const displayFiveDay = function displayFiveDayForecast(forecastArray) {
-  const fiveDayContainer = document.createElement("div");
+  const fiveDayContainer = document.querySelector(
+    ".five-day-forecast-container"
+  );
 
   for (let forecast of forecastArray) {
     const dayContainer = document.createElement("div");

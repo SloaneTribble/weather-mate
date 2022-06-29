@@ -1,10 +1,14 @@
 import "./style.css";
 
+import { fillPage } from "./fill-page";
+
 import { getWeather, getForecast } from "./get-weather";
 
 import { displayDaily } from "./display-daily";
 
 import { displayFiveDay } from "./display-five-day";
+
+fillPage();
 
 const dailyWeather = getWeather("santa cruz");
 

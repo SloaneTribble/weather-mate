@@ -5,8 +5,7 @@ import { getWeather } from "./get-weather";
  * Append those elements to the daily-forecast-container element
  */
 const displayDaily = function displayDailyForecast(forecastObject) {
-  const container = document.createElement("div");
-  container.classList.add("daily-forecast-container");
+  const container = document.querySelector(".daily-forecast-container");
 
   const description = document.createElement("div");
   description.textContent = forecastObject.overview;

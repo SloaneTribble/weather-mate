@@ -1,0 +1,12 @@
+.header{
+    height: 1rem;
+    background-color: blue;
+}
+
+.daily-forecast-container{
+    background-color: beige;
+}
+
+.five-day-forecast-container{
+    background-color:aquamarine;
+}

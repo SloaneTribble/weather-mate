@@ -2,6 +2,8 @@ import "./style.css";
 
 import { fillPage } from "./fill-page";
 
+import { clearDisplay } from "./clear-display";
+
 import { getWeather, getForecast } from "./get-weather";
 
 import { displayDaily } from "./display-daily";
@@ -18,6 +20,8 @@ form.addEventListener("submit", (e) => {
 
 const submitButton = document.querySelector(".submit-button");
 submitButton.addEventListener("click", () => {
+  clearDisplay();
+
   const locationField = document.querySelector(".location");
   const location = locationField.value;
   console.log(location);

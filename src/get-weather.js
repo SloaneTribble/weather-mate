@@ -1,3 +1,5 @@
+import { format, parseISO } from "date-fns";
+
 /**
  * Allow user to choose temperature units.  Choices = imperial and metric;
  * example:
@@ -5,16 +7,7 @@
  */
 
 async function getWeather(input) {
-  // separate city name from state and/or country
-  const locationArray = input.split(",");
-
-  //Replace spaces in each array element with plus signs
-  for (let i = 0; i < locationArray.length; i++) {
-    locationArray[i].replace(/\s/g, "+");
-  }
-
-  // Join array elements back into a single string
-  const location = String(locationArray);
+  const location = formatLoc(input);
 
   const response = await fetch(
     `https://api.openweathermap.org/data/2.5/weather?q=${location}&APPID=127129261617cbfa5cf75835b41e98fa&units=imperial`,
@@ -54,32 +47,44 @@ async function getForecast(latitude, longitude) {
 
   // An array for date objects
   const dateArray = [];
-  for (let i = 0; i < dateList.length; i += 8) {
+  // Begin iterating through array one day ahead
+  for (let i = 7; i <= dateList.length; i += 8) {
+    console.log(i);
     const currentDate = dateList[i];
 
-    const date = currentDate.dt_txt;
+    // Get current date and time, remove time
+    let date = currentDate.dt_txt.split(" ")[0];
+
+    // Parse date string and then format using date-fns
+    date = format(parseISO(date), "P");
 
     const description = currentDate.weather[0].description;
 
     const temp = currentDate.main.temp;
 
-    const feelsLike = currentDate.main.feels_like;
-
-    const tempMin = currentDate.main.temp_min;
-
-    const tempMax = currentDate.main.temp_max;
-
     dateArray.push({
       date,
       description,
       temp,
-      feelsLike,
-      tempMin,
-      tempMax,
     });
   }
 
   return dateArray;
 }
+
+const formatLoc = function formatLocation(input) {
+  // separate city name from state and/or country
+  const locationArray = input.split(",");
+
+  //Replace spaces in each array element with plus signs
+  for (let i = 0; i < locationArray.length; i++) {
+    locationArray[i].replace(/\s/g, "+");
+  }
+
+  // Join array elements back into a single string
+  const location = String(locationArray);
+
+  return location;
+};
 
 export { getWeather, getForecast };

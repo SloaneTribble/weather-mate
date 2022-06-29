@@ -18,21 +18,9 @@ const displayFiveDay = function displayFiveDayForecast(forecastArray) {
     const avgTemp = document.createElement("div");
     avgTemp.textContent = forecast.temp;
 
-    const feel = document.createElement("div");
-    feel.textContent = forecast.feelsLike;
-
-    const minTemp = document.createElement("div");
-    minTemp.textContent = forecast.tempMin;
-
-    const maxTemp = document.createElement("div");
-    maxTemp.textContent = forecast.tempMax;
-
     dayContainer.appendChild(day);
     dayContainer.appendChild(overview);
     dayContainer.appendChild(avgTemp);
-    dayContainer.appendChild(feel);
-    dayContainer.appendChild(minTemp);
-    dayContainer.appendChild(maxTemp);
 
     fiveDayContainer.appendChild(dayContainer);
   }

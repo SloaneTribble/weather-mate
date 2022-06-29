@@ -1,3 +1,5 @@
+import { formatRelative } from "date-fns";
+
 const fillPage = function populateBodyWithDivs() {
   const mainContainer = pageContainerMaker();
 
@@ -25,7 +27,30 @@ const makeHeader = function headerMaker() {
   const header = document.createElement("div");
   header.classList.add("header");
 
+  header.appendChild(makeForm());
+
   return header;
+};
+
+const makeForm = function formMaker() {
+  const form = document.createElement("form");
+  form.classList.add("form");
+
+  const location = document.createElement("input");
+  location.classList.add("location");
+  location.type = "text";
+  location.name = "location";
+  location.placeholder = "Location ([City], [City, State], [City, Country])";
+
+  const submit = document.createElement("button");
+  submit.classList.add("submit-button");
+  submit.type = "submit";
+  submit.textContent = "Submit";
+
+  form.appendChild(location);
+  form.appendChild(submit);
+
+  return form;
 };
 
 const makeDaily = function makeDailyForecastContainer() {

@@ -4044,6 +4044,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "fillPage": () => (/* binding */ fillPage)
 /* harmony export */ });
+
+
 const fillPage = function populateBodyWithDivs() {
   const mainContainer = pageContainerMaker();
 
@@ -4071,7 +4073,30 @@ const makeHeader = function headerMaker() {
   const header = document.createElement("div");
   header.classList.add("header");
 
+  header.appendChild(makeForm());
+
   return header;
+};
+
+const makeForm = function formMaker() {
+  const form = document.createElement("form");
+  form.classList.add("form");
+
+  const location = document.createElement("input");
+  location.classList.add("location");
+  location.type = "text";
+  location.name = "location";
+  location.placeholder = "Location ([City], [City, State], [City, Country])";
+
+  const submit = document.createElement("button");
+  submit.classList.add("submit-button");
+  submit.type = "submit";
+  submit.textContent = "Submit";
+
+  form.appendChild(location);
+  form.appendChild(submit);
+
+  return form;
 };
 
 const makeDaily = function makeDailyForecastContainer() {
@@ -4297,28 +4322,41 @@ __webpack_require__.r(__webpack_exports__);
 
 (0,_fill_page__WEBPACK_IMPORTED_MODULE_1__.fillPage)();
 
-const dailyWeather = (0,_get_weather__WEBPACK_IMPORTED_MODULE_2__.getWeather)("santa cruz");
+const form = document.querySelector(".form");
 
-// Use daily forecast object to create display
-dailyWeather.then((weatherObject) => (0,_display_daily__WEBPACK_IMPORTED_MODULE_3__.displayDaily)(weatherObject));
-
-/**
- * Extract latitude and longitude from daily forecast object, use as
- * arguments to search for 5-day forecast
- */
-const forecast = dailyWeather.then((weatherObject) => {
-  const lat = weatherObject.latitude;
-  const long = weatherObject.longitude;
-  const forecastArray = (0,_get_weather__WEBPACK_IMPORTED_MODULE_2__.getForecast)(lat, long);
-
-  // returns an array of 5 objects, each representing a day's forecast
-  return forecastArray;
+form.addEventListener("submit", (e) => {
+  e.preventDefault();
 });
 
-/**
- * Use array of forecast objects to display 5-day forecast
- */
-forecast.then((result) => (0,_display_five_day__WEBPACK_IMPORTED_MODULE_4__.displayFiveDay)(result));
+const submitButton = document.querySelector(".submit-button");
+submitButton.addEventListener("click", () => {
+  const locationField = document.querySelector(".location");
+  const location = locationField.value;
+  console.log(location);
+
+  const dailyWeather = (0,_get_weather__WEBPACK_IMPORTED_MODULE_2__.getWeather)(location);
+
+  // Use daily forecast object to create display
+  dailyWeather.then((weatherObject) => (0,_display_daily__WEBPACK_IMPORTED_MODULE_3__.displayDaily)(weatherObject));
+
+  /**
+   * Extract latitude and longitude from daily forecast object, use as
+   * arguments to search for 5-day forecast
+   */
+  const forecast = dailyWeather.then((weatherObject) => {
+    const lat = weatherObject.latitude;
+    const long = weatherObject.longitude;
+    const forecastArray = (0,_get_weather__WEBPACK_IMPORTED_MODULE_2__.getForecast)(lat, long);
+
+    // returns an array of 5 objects, each representing a day's forecast
+    return forecastArray;
+  });
+
+  /**
+   * Use array of forecast objects to display 5-day forecast
+   */
+  forecast.then((result) => (0,_display_five_day__WEBPACK_IMPORTED_MODULE_4__.displayFiveDay)(result));
+});
 
 })();
 

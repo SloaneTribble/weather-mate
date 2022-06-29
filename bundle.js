@@ -656,9 +656,20 @@ __webpack_require__.r(__webpack_exports__);
  * "https://api.openweathermap.org/data/2.5/weather?q=London,uk&APPID=127129261617cbfa5cf75835b41e98fa&units=imperial"
  */
 
-async function getWeather() {
+async function getWeather(input) {
+  // separate city name from state and/or country
+  const locationArray = input.split(",");
+
+  //Replace spaces in each array element with plus signs
+  for (let i = 0; i < locationArray.length; i++) {
+    locationArray[i].replace(/\s/g, "+");
+  }
+
+  // Join array elements back into a single string
+  const location = String(locationArray);
+
   const response = await fetch(
-    "https://api.openweathermap.org/data/2.5/weather?q=ojai,california&APPID=127129261617cbfa5cf75835b41e98fa&units=imperial",
+    `https://api.openweathermap.org/data/2.5/weather?q=${location}&APPID=127129261617cbfa5cf75835b41e98fa&units=imperial`,
     { mode: "cors" }
   );
 
@@ -820,7 +831,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-const dailyWeather = (0,_get_weather__WEBPACK_IMPORTED_MODULE_1__.getWeather)();
+const dailyWeather = (0,_get_weather__WEBPACK_IMPORTED_MODULE_1__.getWeather)("new york city, new york");
 
 // Use daily forecast object to create display
 dailyWeather.then((weatherObject) => (0,_display_daily__WEBPACK_IMPORTED_MODULE_2__.displayDaily)(weatherObject));

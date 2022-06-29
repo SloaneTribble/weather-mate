@@ -6,7 +6,7 @@ import { displayDaily } from "./display-daily";
 
 import { displayFiveDay } from "./display-five-day";
 
-const dailyWeather = getWeather();
+const dailyWeather = getWeather("new york city, new york");
 
 // Use daily forecast object to create display
 dailyWeather.then((weatherObject) => displayDaily(weatherObject));

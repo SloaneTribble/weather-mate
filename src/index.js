@@ -4,6 +4,10 @@ import { getWeather, getForecast } from "./get-weather";
 
 const dailyWeather = getWeather();
 
+// Use daily forecast object to create display
+
+dailyWeather.then(console.log("I hope this is cool"));
+
 /**
  * Extract latitude and longitude from daily forecast object, use as
  * arguments to search for 5-day forecast

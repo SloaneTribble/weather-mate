@@ -698,6 +698,10 @@ __webpack_require__.r(__webpack_exports__);
 
 const dailyWeather = (0,_get_weather__WEBPACK_IMPORTED_MODULE_1__.getWeather)();
 
+// Use daily forecast object to create display
+
+dailyWeather.then(console.log("I hope this is cool"));
+
 /**
  * Extract latitude and longitude from daily forecast object, use as
  * arguments to search for 5-day forecast

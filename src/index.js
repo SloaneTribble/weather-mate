@@ -2,11 +2,13 @@ import "./style.css";
 
 import { getWeather, getForecast } from "./get-weather";
 
+import { displayDaily } from "./display-daily";
+
 const dailyWeather = getWeather();
 
-// Use daily forecast object to create display
+displayDaily();
 
-dailyWeather.then(console.log("I hope this is cool"));
+// Use daily forecast object to create display
 
 /**
  * Extract latitude and longitude from daily forecast object, use as

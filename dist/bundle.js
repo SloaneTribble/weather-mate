@@ -530,6 +530,58 @@ module.exports = styleTagTransform;
 
 /***/ }),
 
+/***/ "./src/display-daily.js":
+/*!******************************!*\
+  !*** ./src/display-daily.js ***!
+  \******************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "displayDaily": () => (/* binding */ displayDaily)
+/* harmony export */ });
+/* harmony import */ var _get_weather__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./get-weather */ "./src/get-weather.js");
+
+
+/**
+ * Take a daily forecast object, append its values to a series of html elements.
+ * Append those elements to the daily-forecast-container element
+ */
+const displayDaily = async function displayDailyForecast() {
+  const forecastObject = await (0,_get_weather__WEBPACK_IMPORTED_MODULE_0__.getWeather)();
+
+  const container = document.createElement("div");
+  container.classList.add("daily-forecast-container");
+
+  const description = document.createElement("div");
+  description.textContent = forecastObject.overview;
+
+  const temp = document.createElement("div");
+  temp.textContent = forecastObject.avgTemp;
+
+  const feeling = document.createElement("div");
+  feeling.textContent = forecastObject.feel;
+
+  const min = document.createElement("div");
+  min.textContent = forecastObject.minTemp;
+
+  const max = document.createElement("div");
+  max.textContent = forecastObject.maxTemp;
+
+  container.appendChild(description);
+  container.appendChild(temp);
+  container.appendChild(feeling);
+  container.appendChild(min);
+  container.appendChild(max);
+
+  document.body.appendChild(container);
+};
+
+
+
+
+/***/ }),
+
 /***/ "./src/get-weather.js":
 /*!****************************!*\
   !*** ./src/get-weather.js ***!
@@ -692,15 +744,18 @@ var __webpack_exports__ = {};
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _style_css__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./style.css */ "./src/style.css");
 /* harmony import */ var _get_weather__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./get-weather */ "./src/get-weather.js");
+/* harmony import */ var _display_daily__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./display-daily */ "./src/display-daily.js");
+
+
 
 
 
 
 const dailyWeather = (0,_get_weather__WEBPACK_IMPORTED_MODULE_1__.getWeather)();
 
-// Use daily forecast object to create display
+(0,_display_daily__WEBPACK_IMPORTED_MODULE_2__.displayDaily)();
 
-dailyWeather.then(console.log("I hope this is cool"));
+// Use daily forecast object to create display
 
 /**
  * Extract latitude and longitude from daily forecast object, use as

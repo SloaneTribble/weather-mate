@@ -4,11 +4,12 @@ import { getWeather, getForecast } from "./get-weather";
 
 import { displayDaily } from "./display-daily";
 
+import { displayFiveDay } from "./display-five-day";
+
 const dailyWeather = getWeather();
 
-displayDaily();
-
 // Use daily forecast object to create display
+dailyWeather.then((weatherObject) => displayDaily(weatherObject));
 
 /**
  * Extract latitude and longitude from daily forecast object, use as
@@ -19,11 +20,11 @@ const forecast = dailyWeather.then((weatherObject) => {
   const long = weatherObject.longitude;
   const forecastArray = getForecast(lat, long);
 
-  // returns an array of objects, each with a day's forecast
+  // returns an array of 5 objects, each representing a day's forecast
   return forecastArray;
 });
 
 /**
- * Use
+ * Use array of forecast objects to display 5-day forecast
  */
-forecast.then((result) => console.log(result[0]));
+forecast.then((result) => displayFiveDay(result));

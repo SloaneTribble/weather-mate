@@ -547,9 +547,7 @@ __webpack_require__.r(__webpack_exports__);
  * Take a daily forecast object, append its values to a series of html elements.
  * Append those elements to the daily-forecast-container element
  */
-const displayDaily = async function displayDailyForecast() {
-  const forecastObject = await (0,_get_weather__WEBPACK_IMPORTED_MODULE_0__.getWeather)();
-
+const displayDaily = function displayDailyForecast(forecastObject) {
   const container = document.createElement("div");
   container.classList.add("daily-forecast-container");
 
@@ -575,6 +573,65 @@ const displayDaily = async function displayDailyForecast() {
   container.appendChild(max);
 
   document.body.appendChild(container);
+};
+
+
+
+
+/***/ }),
+
+/***/ "./src/display-five-day.js":
+/*!*********************************!*\
+  !*** ./src/display-five-day.js ***!
+  \*********************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "displayFiveDay": () => (/* binding */ displayFiveDay)
+/* harmony export */ });
+/**
+ * Take an array of daily forecast objects, iterate over them and use their
+ * properties to populate a series of divs.  Append those divs to a container div
+ */
+const displayFiveDay = function displayFiveDayForecast(forecastArray) {
+  const fiveDayContainer = document.createElement("div");
+
+  for (let forecast of forecastArray) {
+    const dayContainer = document.createElement("div");
+    dayContainer.className = "day-container";
+
+    const day = document.createElement("div");
+    day.textContent = forecast.date;
+
+    const overview = document.createElement("div");
+    overview.textContent = forecast.description;
+
+    const avgTemp = document.createElement("div");
+    avgTemp.textContent = forecast.temp;
+
+    const feel = document.createElement("div");
+    feel.textContent = forecast.feelsLike;
+
+    const minTemp = document.createElement("div");
+    minTemp.textContent = forecast.tempMin;
+
+    const maxTemp = document.createElement("div");
+    maxTemp.textContent = forecast.tempMax;
+
+    dayContainer.appendChild(day);
+    dayContainer.appendChild(overview);
+    dayContainer.appendChild(avgTemp);
+    dayContainer.appendChild(feel);
+    dayContainer.appendChild(minTemp);
+    dayContainer.appendChild(maxTemp);
+
+    fiveDayContainer.appendChild(dayContainer);
+  }
+
+  document.body.appendChild(fiveDayContainer);
+
+  return;
 };
 
 
@@ -641,6 +698,8 @@ async function getForecast(latitude, longitude) {
   for (let i = 0; i < dateList.length; i += 8) {
     const currentDate = dateList[i];
 
+    const date = currentDate.dt_txt;
+
     const description = currentDate.weather[0].description;
 
     const temp = currentDate.main.temp;
@@ -651,7 +710,14 @@ async function getForecast(latitude, longitude) {
 
     const tempMax = currentDate.main.temp_max;
 
-    dateArray.push({ description, temp, feelsLike, tempMin, tempMax });
+    dateArray.push({
+      date,
+      description,
+      temp,
+      feelsLike,
+      tempMin,
+      tempMax,
+    });
   }
 
   return dateArray;
@@ -745,6 +811,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _style_css__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./style.css */ "./src/style.css");
 /* harmony import */ var _get_weather__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./get-weather */ "./src/get-weather.js");
 /* harmony import */ var _display_daily__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./display-daily */ "./src/display-daily.js");
+/* harmony import */ var _display_five_day__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./display-five-day */ "./src/display-five-day.js");
+
+
 
 
 
@@ -753,9 +822,8 @@ __webpack_require__.r(__webpack_exports__);
 
 const dailyWeather = (0,_get_weather__WEBPACK_IMPORTED_MODULE_1__.getWeather)();
 
-(0,_display_daily__WEBPACK_IMPORTED_MODULE_2__.displayDaily)();
-
 // Use daily forecast object to create display
+dailyWeather.then((weatherObject) => (0,_display_daily__WEBPACK_IMPORTED_MODULE_2__.displayDaily)(weatherObject));
 
 /**
  * Extract latitude and longitude from daily forecast object, use as
@@ -766,14 +834,14 @@ const forecast = dailyWeather.then((weatherObject) => {
   const long = weatherObject.longitude;
   const forecastArray = (0,_get_weather__WEBPACK_IMPORTED_MODULE_1__.getForecast)(lat, long);
 
-  // returns an array of objects, each with a day's forecast
+  // returns an array of 5 objects, each representing a day's forecast
   return forecastArray;
 });
 
 /**
- * Use
+ * Use array of forecast objects to display 5-day forecast
  */
-forecast.then((result) => console.log(result[0]));
+forecast.then((result) => (0,_display_five_day__WEBPACK_IMPORTED_MODULE_3__.displayFiveDay)(result));
 
 })();
 

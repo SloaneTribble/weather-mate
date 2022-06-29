@@ -46,6 +46,8 @@ async function getForecast(latitude, longitude) {
   for (let i = 0; i < dateList.length; i += 8) {
     const currentDate = dateList[i];
 
+    const date = currentDate.dt_txt;
+
     const description = currentDate.weather[0].description;
 
     const temp = currentDate.main.temp;
@@ -56,7 +58,14 @@ async function getForecast(latitude, longitude) {
 
     const tempMax = currentDate.main.temp_max;
 
-    dateArray.push({ description, temp, feelsLike, tempMin, tempMax });
+    dateArray.push({
+      date,
+      description,
+      temp,
+      feelsLike,
+      tempMin,
+      tempMax,
+    });
   }
 
   return dateArray;

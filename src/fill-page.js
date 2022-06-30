@@ -28,6 +28,7 @@ const makeHeader = function headerMaker() {
   header.classList.add("header");
 
   header.appendChild(makeForm());
+  header.appendChild(makeErrorBar());
 
   return header;
 };
@@ -51,6 +52,13 @@ const makeForm = function formMaker() {
   form.appendChild(submit);
 
   return form;
+};
+
+const makeErrorBar = function errorHolder() {
+  const errorBar = document.createElement("div");
+  errorBar.classList.add("error-bar");
+
+  return errorBar;
 };
 
 const makeDaily = function makeDailyForecastContainer() {

@@ -9,33 +9,44 @@ import { format, parseISO } from "date-fns";
 async function getWeather(input) {
   const location = formatLoc(input);
 
-  const response = await fetch(
-    `https://api.openweathermap.org/data/2.5/weather?q=${location}&APPID=127129261617cbfa5cf75835b41e98fa&units=imperial`,
-    { mode: "cors" }
-  );
+  try {
+    const response = await fetch(
+      `https://api.openweathermap.org/data/2.5/weather?q=${location}&APPID=127129261617cbfa5cf75835b41e98fa&units=imperial`,
+      { mode: "cors" }
+    );
 
-  const responseData = await response.json();
+    const responseData = await response.json();
 
-  console.log(responseData);
+    console.log(responseData);
 
-  const latitude = responseData.coord.lat;
+    const latitude = responseData.coord.lat;
 
-  const longitude = responseData.coord.lon;
+    const longitude = responseData.coord.lon;
 
-  const overview = responseData.weather[0].description;
+    const overview = responseData.weather[0].description;
 
-  const avgTemp = responseData.main.temp;
+    const avgTemp = responseData.main.temp;
 
-  const feel = responseData.main.feels_like;
+    const feel = responseData.main.feels_like;
 
-  const minTemp = responseData.main.temp_min;
+    const minTemp = responseData.main.temp_min;
 
-  const maxTemp = responseData.main.temp_max;
+    const maxTemp = responseData.main.temp_max;
 
-  return { latitude, longitude, overview, avgTemp, feel, minTemp, maxTemp };
+    return { latitude, longitude, overview, avgTemp, feel, minTemp, maxTemp };
+  } catch (error) {
+    const errorBar = document.querySelector(".error-bar");
+    errorBar.textContent =
+      'Please make sure you enter location in the following format: "City", "City, State", "City, Country", or "City, State, Country"';
+    return;
+  }
 }
 
 async function getForecast(latitude, longitude) {
+  // If this function is reached, then location was successfully found and there are no errors
+  const errorBar = document.querySelector(".error-bar");
+  errorBar.textContent = "";
+
   const forecast = await fetch(
     `https://api.openweathermap.org/data/2.5/forecast?lat=${latitude}&lon=${longitude}&appid=127129261617cbfa5cf75835b41e98fa&units=imperial`,
     { mode: "cors" }

@@ -26,7 +26,12 @@ submitButton.addEventListener("click", () => {
   const location = locationField.value;
   console.log(location);
 
-  const dailyWeather = getWeather(location);
+  const unitField = document.querySelector('input[name="units"]:checked').value;
+  console.log(unitField);
+
+  const units = unitField === "celsius" ? "metric" : "imperial";
+
+  const dailyWeather = getWeather(location, units);
 
   // Use daily forecast object to create display
   dailyWeather.then((weatherObject) => displayDaily(weatherObject));
@@ -38,7 +43,7 @@ submitButton.addEventListener("click", () => {
   const forecast = dailyWeather.then((weatherObject) => {
     const lat = weatherObject.latitude;
     const long = weatherObject.longitude;
-    const forecastArray = getForecast(lat, long);
+    const forecastArray = getForecast(lat, long, units);
 
     // returns an array of 5 objects, each representing a day's forecast
     return forecastArray;

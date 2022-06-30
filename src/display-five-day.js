@@ -18,7 +18,7 @@ const displayFiveDay = function displayFiveDayForecast(forecastArray) {
     overview.textContent = forecast.description;
 
     const avgTemp = document.createElement("div");
-    avgTemp.textContent = forecast.temp;
+    avgTemp.textContent = forecast.temp + "\xB0";
 
     dayContainer.appendChild(day);
     dayContainer.appendChild(overview);

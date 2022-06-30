@@ -6,12 +6,12 @@ import { format, parseISO } from "date-fns";
  * "https://api.openweathermap.org/data/2.5/weather?q=London,uk&APPID=127129261617cbfa5cf75835b41e98fa&units=imperial"
  */
 
-async function getWeather(input) {
+async function getWeather(input, units) {
   const location = formatLoc(input);
 
   try {
     const response = await fetch(
-      `https://api.openweathermap.org/data/2.5/weather?q=${location}&APPID=127129261617cbfa5cf75835b41e98fa&units=imperial`,
+      `https://api.openweathermap.org/data/2.5/weather?q=${location}&APPID=127129261617cbfa5cf75835b41e98fa&units=${units}`,
       { mode: "cors" }
     );
 
@@ -42,13 +42,13 @@ async function getWeather(input) {
   }
 }
 
-async function getForecast(latitude, longitude) {
+async function getForecast(latitude, longitude, units) {
   // If this function is reached, then location was successfully found and there are no errors
   const errorBar = document.querySelector(".error-bar");
   errorBar.textContent = "";
 
   const forecast = await fetch(
-    `https://api.openweathermap.org/data/2.5/forecast?lat=${latitude}&lon=${longitude}&appid=127129261617cbfa5cf75835b41e98fa&units=imperial`,
+    `https://api.openweathermap.org/data/2.5/forecast?lat=${latitude}&lon=${longitude}&appid=127129261617cbfa5cf75835b41e98fa&units=${units}`,
     { mode: "cors" }
   );
 
@@ -60,7 +60,6 @@ async function getForecast(latitude, longitude) {
   const dateArray = [];
   // Begin iterating through array one day ahead
   for (let i = 7; i <= dateList.length; i += 8) {
-    console.log(i);
     const currentDate = dateList[i];
 
     // Get current date and time, remove time

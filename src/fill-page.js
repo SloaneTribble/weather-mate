@@ -43,12 +43,37 @@ const makeForm = function formMaker() {
   location.name = "location";
   location.placeholder = "Location ([City], [City, State], [City, Country])";
 
+  const fLabel = document.createElement("label");
+  fLabel.htmlFor = "fahrenheit";
+  fLabel.textContent = "Fahrenheit";
+
+  const fahrenheit = document.createElement("input");
+  fahrenheit.type = "radio";
+  fahrenheit.name = "units";
+  fahrenheit.value = "fahrenheit";
+  fahrenheit.id = "fahrenheit";
+  fahrenheit.required = true;
+
+  const cLabel = document.createElement("label");
+  cLabel.htmlFor = "celsius";
+  cLabel.textContent = "Celsius";
+
+  const celsius = document.createElement("input");
+  celsius.type = "radio";
+  celsius.name = "units";
+  celsius.value = "celsius";
+  celsius.id = "celsius";
+
   const submit = document.createElement("button");
   submit.classList.add("submit-button");
   submit.type = "submit";
   submit.textContent = "Submit";
 
   form.appendChild(location);
+  form.appendChild(fLabel);
+  form.appendChild(fahrenheit);
+  form.appendChild(cLabel);
+  form.appendChild(celsius);
   form.appendChild(submit);
 
   return form;

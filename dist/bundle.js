@@ -3990,19 +3990,21 @@ const displayDaily = function displayDailyForecast(forecastObject) {
   const container = document.querySelector(".daily-forecast-container");
 
   const description = document.createElement("div");
-  description.textContent = forecastObject.overview;
+  let descriptionText = forecastObject.overview;
+  descriptionText = format(descriptionText);
+  description.textContent = descriptionText;
 
   const temp = document.createElement("div");
-  temp.textContent = forecastObject.avgTemp;
+  temp.textContent = `Average: ${forecastObject.avgTemp}\xB0`;
 
   const feeling = document.createElement("div");
-  feeling.textContent = forecastObject.feel;
+  feeling.textContent = `Feels Like: ${forecastObject.feel}\xB0`;
 
   const min = document.createElement("div");
-  min.textContent = forecastObject.minTemp;
+  min.textContent = `Low: ${forecastObject.minTemp}\xB0`;
 
   const max = document.createElement("div");
-  max.textContent = forecastObject.maxTemp;
+  max.textContent = `High: ${forecastObject.maxTemp}\xB0`;
 
   container.appendChild(description);
   container.appendChild(temp);
@@ -4011,6 +4013,15 @@ const displayDaily = function displayDailyForecast(forecastObject) {
   container.appendChild(max);
 
   document.body.appendChild(container);
+};
+
+const format = function capitalizeFirstWord(description) {
+  const separateWords = description.split(" ");
+  for (let i = 0; i < separateWords.length; i++) {
+    separateWords[i] =
+      separateWords[i].charAt(0).toUpperCase() + separateWords[i].substring(1);
+  }
+  return separateWords.join(" ");
 };
 
 
@@ -4048,7 +4059,7 @@ const displayFiveDay = function displayFiveDayForecast(forecastArray) {
     overview.textContent = forecast.description;
 
     const avgTemp = document.createElement("div");
-    avgTemp.textContent = forecast.temp;
+    avgTemp.textContent = forecast.temp + "\xB0";
 
     dayContainer.appendChild(day);
     dayContainer.appendChild(overview);
@@ -4122,12 +4133,37 @@ const makeForm = function formMaker() {
   location.name = "location";
   location.placeholder = "Location ([City], [City, State], [City, Country])";
 
+  const fLabel = document.createElement("label");
+  fLabel.htmlFor = "fahrenheit";
+  fLabel.textContent = "Fahrenheit";
+
+  const fahrenheit = document.createElement("input");
+  fahrenheit.type = "radio";
+  fahrenheit.name = "units";
+  fahrenheit.value = "fahrenheit";
+  fahrenheit.id = "fahrenheit";
+  fahrenheit.required = true;
+
+  const cLabel = document.createElement("label");
+  cLabel.htmlFor = "celsius";
+  cLabel.textContent = "Celsius";
+
+  const celsius = document.createElement("input");
+  celsius.type = "radio";
+  celsius.name = "units";
+  celsius.value = "celsius";
+  celsius.id = "celsius";
+
   const submit = document.createElement("button");
   submit.classList.add("submit-button");
   submit.type = "submit";
   submit.textContent = "Submit";
 
   form.appendChild(location);
+  form.appendChild(fLabel);
+  form.appendChild(fahrenheit);
+  form.appendChild(cLabel);
+  form.appendChild(celsius);
   form.appendChild(submit);
 
   return form;
@@ -4180,12 +4216,12 @@ __webpack_require__.r(__webpack_exports__);
  * "https://api.openweathermap.org/data/2.5/weather?q=London,uk&APPID=127129261617cbfa5cf75835b41e98fa&units=imperial"
  */
 
-async function getWeather(input) {
+async function getWeather(input, units) {
   const location = formatLoc(input);
 
   try {
     const response = await fetch(
-      `https://api.openweathermap.org/data/2.5/weather?q=${location}&APPID=127129261617cbfa5cf75835b41e98fa&units=imperial`,
+      `https://api.openweathermap.org/data/2.5/weather?q=${location}&APPID=127129261617cbfa5cf75835b41e98fa&units=${units}`,
       { mode: "cors" }
     );
 
@@ -4216,13 +4252,13 @@ async function getWeather(input) {
   }
 }
 
-async function getForecast(latitude, longitude) {
+async function getForecast(latitude, longitude, units) {
   // If this function is reached, then location was successfully found and there are no errors
   const errorBar = document.querySelector(".error-bar");
   errorBar.textContent = "";
 
   const forecast = await fetch(
-    `https://api.openweathermap.org/data/2.5/forecast?lat=${latitude}&lon=${longitude}&appid=127129261617cbfa5cf75835b41e98fa&units=imperial`,
+    `https://api.openweathermap.org/data/2.5/forecast?lat=${latitude}&lon=${longitude}&appid=127129261617cbfa5cf75835b41e98fa&units=${units}`,
     { mode: "cors" }
   );
 
@@ -4234,7 +4270,6 @@ async function getForecast(latitude, longitude) {
   const dateArray = [];
   // Begin iterating through array one day ahead
   for (let i = 7; i <= dateList.length; i += 8) {
-    console.log(i);
     const currentDate = dateList[i];
 
     // Get current date and time, remove time
@@ -4391,7 +4426,12 @@ submitButton.addEventListener("click", () => {
   const location = locationField.value;
   console.log(location);
 
-  const dailyWeather = (0,_get_weather__WEBPACK_IMPORTED_MODULE_3__.getWeather)(location);
+  const unitField = document.querySelector('input[name="units"]:checked').value;
+  console.log(unitField);
+
+  const units = unitField === "celsius" ? "metric" : "imperial";
+
+  const dailyWeather = (0,_get_weather__WEBPACK_IMPORTED_MODULE_3__.getWeather)(location, units);
 
   // Use daily forecast object to create display
   dailyWeather.then((weatherObject) => (0,_display_daily__WEBPACK_IMPORTED_MODULE_4__.displayDaily)(weatherObject));
@@ -4403,7 +4443,7 @@ submitButton.addEventListener("click", () => {
   const forecast = dailyWeather.then((weatherObject) => {
     const lat = weatherObject.latitude;
     const long = weatherObject.longitude;
-    const forecastArray = (0,_get_weather__WEBPACK_IMPORTED_MODULE_3__.getForecast)(lat, long);
+    const forecastArray = (0,_get_weather__WEBPACK_IMPORTED_MODULE_3__.getForecast)(lat, long, units);
 
     // returns an array of 5 objects, each representing a day's forecast
     return forecastArray;

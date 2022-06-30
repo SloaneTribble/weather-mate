@@ -3994,6 +3994,12 @@ const displayDaily = function displayDailyForecast(forecastObject) {
   descriptionText = format(descriptionText);
   description.textContent = descriptionText;
 
+  let imageStyle = chooseStyle(forecastObject.overview);
+
+  const image = document.createElement("img");
+  image.classList.add("weather-image");
+  addGif(image, imageStyle);
+
   const temp = document.createElement("div");
   temp.textContent = `Average: ${forecastObject.avgTemp}\xB0`;
 
@@ -4011,6 +4017,7 @@ const displayDaily = function displayDailyForecast(forecastObject) {
   container.appendChild(feeling);
   container.appendChild(min);
   container.appendChild(max);
+  container.appendChild(image);
 
   document.body.appendChild(container);
 };
@@ -4022,6 +4029,40 @@ const format = function capitalizeFirstWord(description) {
       separateWords[i].charAt(0).toUpperCase() + separateWords[i].substring(1);
   }
   return separateWords.join(" ");
+};
+
+const addGif = function fetchGif(image, style) {
+  fetch(
+    `https://api.giphy.com/v1/gifs/translate?api_key=umcSu4OKde9HxKB2XzPu3WrecdvJqniu&s=${style}`,
+    {
+      mode: "cors",
+    }
+  )
+    .then(function (response) {
+      return response.json();
+    })
+    .then(function (response) {
+      image.src = response.data.images.original.url;
+    });
+};
+
+const chooseStyle = function styleChoose(description) {
+  let imageStyle;
+  switch (true) {
+    case description.includes("clouds"):
+      imageStyle = "cloudy#weather";
+      break;
+    case description.includes("rain"):
+      imageStyle = "rain#weather";
+      break;
+    case description.includes("thunder"):
+      imageStyle = "rain#thunder";
+      break;
+    case description.includes("clear"):
+      imageStyle = "sunny#weather";
+      break;
+  }
+  return imageStyle;
 };
 
 
@@ -4039,6 +4080,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "displayFiveDay": () => (/* binding */ displayFiveDay)
 /* harmony export */ });
+/* harmony import */ var _images_rain_png__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./images/rain.png */ "./src/images/rain.png");
+
+
 /**
  * Take an array of daily forecast objects, iterate over them and use their
  * properties to populate a series of divs.  Append those divs to a container div
@@ -4055,8 +4099,10 @@ const displayFiveDay = function displayFiveDayForecast(forecastArray) {
     const day = document.createElement("div");
     day.textContent = forecast.date;
 
-    const overview = document.createElement("div");
-    overview.textContent = forecast.description;
+    const overview = document.createElement("img");
+    const description = forecast.description;
+    console.log(description);
+    overview.src = choosePicture(description);
 
     const avgTemp = document.createElement("div");
     avgTemp.textContent = forecast.temp + "\xB0";
@@ -4073,7 +4119,22 @@ const displayFiveDay = function displayFiveDayForecast(forecastArray) {
   return;
 };
 
+const choosePicture = function picChoose(description) {
+  let imageSource;
+  switch (true) {
+    default:
+      imageSource = _images_rain_png__WEBPACK_IMPORTED_MODULE_0__;
+      break;
+  }
+  return imageSource;
+};
 
+
+
+/**
+ * <a href="https://www.flaticon.com/free-icons/sun" title="sun icons">Sun icons created by Freepik - Flaticon</a>
+ * <a href="https://www.flaticon.com/free-icons/sun" title="sun icons">Sun icons created by Freepik - Flaticon</a>
+ */
 
 
 /***/ }),
@@ -4310,6 +4371,16 @@ const formatLoc = function formatLocation(input) {
 
 
 
+/***/ }),
+
+/***/ "./src/images/rain.png":
+/*!*****************************!*\
+  !*** ./src/images/rain.png ***!
+  \*****************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+module.exports = __webpack_require__.p + "fea62e3beeb0049f5768.png";
+
 /***/ })
 
 /******/ 	});
@@ -4363,6 +4434,18 @@ const formatLoc = function formatLocation(input) {
 /******/ 		};
 /******/ 	})();
 /******/ 	
+/******/ 	/* webpack/runtime/global */
+/******/ 	(() => {
+/******/ 		__webpack_require__.g = (function() {
+/******/ 			if (typeof globalThis === 'object') return globalThis;
+/******/ 			try {
+/******/ 				return this || new Function('return this')();
+/******/ 			} catch (e) {
+/******/ 				if (typeof window === 'object') return window;
+/******/ 			}
+/******/ 		})();
+/******/ 	})();
+/******/ 	
 /******/ 	/* webpack/runtime/hasOwnProperty shorthand */
 /******/ 	(() => {
 /******/ 		__webpack_require__.o = (obj, prop) => (Object.prototype.hasOwnProperty.call(obj, prop))
@@ -4377,6 +4460,26 @@ const formatLoc = function formatLocation(input) {
 /******/ 			}
 /******/ 			Object.defineProperty(exports, '__esModule', { value: true });
 /******/ 		};
+/******/ 	})();
+/******/ 	
+/******/ 	/* webpack/runtime/publicPath */
+/******/ 	(() => {
+/******/ 		var scriptUrl;
+/******/ 		if (__webpack_require__.g.importScripts) scriptUrl = __webpack_require__.g.location + "";
+/******/ 		var document = __webpack_require__.g.document;
+/******/ 		if (!scriptUrl && document) {
+/******/ 			if (document.currentScript)
+/******/ 				scriptUrl = document.currentScript.src
+/******/ 			if (!scriptUrl) {
+/******/ 				var scripts = document.getElementsByTagName("script");
+/******/ 				if(scripts.length) scriptUrl = scripts[scripts.length - 1].src
+/******/ 			}
+/******/ 		}
+/******/ 		// When supporting browsers where an automatic publicPath is not supported you must specify an output.publicPath manually via configuration
+/******/ 		// or pass an empty string ("") and set the __webpack_public_path__ variable from your code to use your own logic.
+/******/ 		if (!scriptUrl) throw new Error("Automatic publicPath is not supported in this browser");
+/******/ 		scriptUrl = scriptUrl.replace(/#.*$/, "").replace(/\?.*$/, "").replace(/\/[^\/]+$/, "/");
+/******/ 		__webpack_require__.p = scriptUrl;
 /******/ 	})();
 /******/ 	
 /******/ 	/* webpack/runtime/nonce */

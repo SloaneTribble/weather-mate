@@ -12,6 +12,12 @@ const displayDaily = function displayDailyForecast(forecastObject) {
   descriptionText = format(descriptionText);
   description.textContent = descriptionText;
 
+  let imageStyle = chooseStyle(forecastObject.overview);
+
+  const image = document.createElement("img");
+  image.classList.add("weather-image");
+  addGif(image, imageStyle);
+
   const temp = document.createElement("div");
   temp.textContent = `Average: ${forecastObject.avgTemp}\xB0`;
 
@@ -29,6 +35,7 @@ const displayDaily = function displayDailyForecast(forecastObject) {
   container.appendChild(feeling);
   container.appendChild(min);
   container.appendChild(max);
+  container.appendChild(image);
 
   document.body.appendChild(container);
 };
@@ -40,6 +47,40 @@ const format = function capitalizeFirstWord(description) {
       separateWords[i].charAt(0).toUpperCase() + separateWords[i].substring(1);
   }
   return separateWords.join(" ");
+};
+
+const addGif = function fetchGif(image, style) {
+  fetch(
+    `https://api.giphy.com/v1/gifs/translate?api_key=umcSu4OKde9HxKB2XzPu3WrecdvJqniu&s=${style}`,
+    {
+      mode: "cors",
+    }
+  )
+    .then(function (response) {
+      return response.json();
+    })
+    .then(function (response) {
+      image.src = response.data.images.original.url;
+    });
+};
+
+const chooseStyle = function styleChoose(description) {
+  let imageStyle;
+  switch (true) {
+    case description.includes("clouds"):
+      imageStyle = "cloudy#weather";
+      break;
+    case description.includes("rain"):
+      imageStyle = "rain#weather";
+      break;
+    case description.includes("thunder"):
+      imageStyle = "rain#thunder";
+      break;
+    case description.includes("clear"):
+      imageStyle = "sunny#weather";
+      break;
+  }
+  return imageStyle;
 };
 
 export { displayDaily };

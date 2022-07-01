@@ -4033,7 +4033,7 @@ const format = function capitalizeFirstWord(description) {
 
 const addGif = function fetchGif(image, style) {
   fetch(
-    `https://api.giphy.com/v1/gifs/translate?api_key=umcSu4OKde9HxKB2XzPu3WrecdvJqniu&s=${style}`,
+    `https://api.giphy.com/v1/gifs/translate?api_key=umcSu4OKde9HxKB2XzPu3WrecdvJqniu&s=${style}&weirdness=5`,
     {
       mode: "cors",
     }
@@ -4061,6 +4061,12 @@ const chooseStyle = function styleChoose(description) {
     case description.includes("clear"):
       imageStyle = "sunny#weather";
       break;
+    case description.includes("haze"):
+      imageStyle = "foggy#weather";
+      break;
+    default:
+      imageStyle = "weather+man#weather";
+      break;
   }
   return imageStyle;
 };
@@ -4080,7 +4086,15 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "displayFiveDay": () => (/* binding */ displayFiveDay)
 /* harmony export */ });
-/* harmony import */ var _images_rain_png__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./images/rain.png */ "./src/images/rain.png");
+/* harmony import */ var _images_sunny_png__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./images/sunny.png */ "./src/images/sunny.png");
+/* harmony import */ var _images_fog_png__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./images/fog.png */ "./src/images/fog.png");
+/* harmony import */ var _images_cloudy_png__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./images/cloudy.png */ "./src/images/cloudy.png");
+/* harmony import */ var _images_overcast_png__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./images/overcast.png */ "./src/images/overcast.png");
+/* harmony import */ var _images_rain_png__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./images/rain.png */ "./src/images/rain.png");
+
+
+
+
 
 
 /**
@@ -4122,8 +4136,23 @@ const displayFiveDay = function displayFiveDayForecast(forecastArray) {
 const choosePicture = function picChoose(description) {
   let imageSource;
   switch (true) {
+    case description.includes("clear"):
+      imageSource = _images_sunny_png__WEBPACK_IMPORTED_MODULE_0__;
+      break;
+    case description.includes("haze"):
+      imageSource = _images_fog_png__WEBPACK_IMPORTED_MODULE_1__;
+      break;
+    case description.includes("overcast"):
+      imageSource = _images_overcast_png__WEBPACK_IMPORTED_MODULE_3__;
+      break;
+    case description.includes("clouds"):
+      imageSource = _images_cloudy_png__WEBPACK_IMPORTED_MODULE_2__;
+      break;
+    case description.includes("rain"):
+      imageSource = _images_rain_png__WEBPACK_IMPORTED_MODULE_4__;
+      break;
     default:
-      imageSource = _images_rain_png__WEBPACK_IMPORTED_MODULE_0__;
+      imageSource = _images_sunny_png__WEBPACK_IMPORTED_MODULE_0__;
       break;
   }
   return imageSource;
@@ -4134,6 +4163,8 @@ const choosePicture = function picChoose(description) {
 /**
  * <a href="https://www.flaticon.com/free-icons/sun" title="sun icons">Sun icons created by Freepik - Flaticon</a>
  * <a href="https://www.flaticon.com/free-icons/sun" title="sun icons">Sun icons created by Freepik - Flaticon</a>
+ * <a href="https://www.flaticon.com/free-icons/sun" title="sun icons">Sun icons created by Smashicons - Flaticon</a>
+ * <a href="https://www.flaticon.com/free-icons/overcast" title="overcast icons">Overcast icons created by Ubaid El-Ahyar Alyafizi - Flaticon</a>
  */
 
 
@@ -4203,6 +4234,7 @@ const makeForm = function formMaker() {
   fahrenheit.name = "units";
   fahrenheit.value = "fahrenheit";
   fahrenheit.id = "fahrenheit";
+  fahrenheit.checked = true;
   fahrenheit.required = true;
 
   const cLabel = document.createElement("label");
@@ -4373,6 +4405,36 @@ const formatLoc = function formatLocation(input) {
 
 /***/ }),
 
+/***/ "./src/images/cloudy.png":
+/*!*******************************!*\
+  !*** ./src/images/cloudy.png ***!
+  \*******************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+module.exports = __webpack_require__.p + "20f0cc1d2fa7fabb49bb.png";
+
+/***/ }),
+
+/***/ "./src/images/fog.png":
+/*!****************************!*\
+  !*** ./src/images/fog.png ***!
+  \****************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+module.exports = __webpack_require__.p + "c5036b42ef763c3b6f60.png";
+
+/***/ }),
+
+/***/ "./src/images/overcast.png":
+/*!*********************************!*\
+  !*** ./src/images/overcast.png ***!
+  \*********************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+module.exports = __webpack_require__.p + "85d43de6c12fd369d039.png";
+
+/***/ }),
+
 /***/ "./src/images/rain.png":
 /*!*****************************!*\
   !*** ./src/images/rain.png ***!
@@ -4380,6 +4442,16 @@ const formatLoc = function formatLocation(input) {
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
 module.exports = __webpack_require__.p + "fea62e3beeb0049f5768.png";
+
+/***/ }),
+
+/***/ "./src/images/sunny.png":
+/*!******************************!*\
+  !*** ./src/images/sunny.png ***!
+  \******************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+module.exports = __webpack_require__.p + "24c7cbf49d83446692a3.png";
 
 /***/ })
 
@@ -4524,7 +4596,10 @@ form.addEventListener("submit", (e) => {
 const submitButton = document.querySelector(".submit-button");
 submitButton.addEventListener("click", () => {
   (0,_clear_display__WEBPACK_IMPORTED_MODULE_2__.clearDisplay)();
+  displayWeather();
+});
 
+const displayWeather = function displayDailyAndFiveDay() {
   const locationField = document.querySelector(".location");
   const location = locationField.value;
   console.log(location);
@@ -4556,7 +4631,7 @@ submitButton.addEventListener("click", () => {
    * Use array of forecast objects to display 5-day forecast
    */
   forecast.then((result) => (0,_display_five_day__WEBPACK_IMPORTED_MODULE_5__.displayFiveDay)(result));
-});
+};
 
 })();
 

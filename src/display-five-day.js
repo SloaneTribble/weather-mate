@@ -1,3 +1,7 @@
+import sunny from "./images/sunny.png";
+import fog from "./images/fog.png";
+import cloudy from "./images/cloudy.png";
+import overcast from "./images/overcast.png";
 import rain from "./images/rain.png";
 
 /**
@@ -39,8 +43,23 @@ const displayFiveDay = function displayFiveDayForecast(forecastArray) {
 const choosePicture = function picChoose(description) {
   let imageSource;
   switch (true) {
-    default:
+    case description.includes("clear"):
+      imageSource = sunny;
+      break;
+    case description.includes("haze"):
+      imageSource = fog;
+      break;
+    case description.includes("overcast"):
+      imageSource = overcast;
+      break;
+    case description.includes("clouds"):
+      imageSource = cloudy;
+      break;
+    case description.includes("rain"):
       imageSource = rain;
+      break;
+    default:
+      imageSource = sunny;
       break;
   }
   return imageSource;
@@ -51,4 +70,6 @@ export { displayFiveDay };
 /**
  * <a href="https://www.flaticon.com/free-icons/sun" title="sun icons">Sun icons created by Freepik - Flaticon</a>
  * <a href="https://www.flaticon.com/free-icons/sun" title="sun icons">Sun icons created by Freepik - Flaticon</a>
+ * <a href="https://www.flaticon.com/free-icons/sun" title="sun icons">Sun icons created by Smashicons - Flaticon</a>
+ * <a href="https://www.flaticon.com/free-icons/overcast" title="overcast icons">Overcast icons created by Ubaid El-Ahyar Alyafizi - Flaticon</a>
  */

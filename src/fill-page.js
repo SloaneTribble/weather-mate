@@ -52,6 +52,7 @@ const makeForm = function formMaker() {
   fahrenheit.name = "units";
   fahrenheit.value = "fahrenheit";
   fahrenheit.id = "fahrenheit";
+  fahrenheit.checked = true;
   fahrenheit.required = true;
 
   const cLabel = document.createElement("label");

@@ -51,7 +51,7 @@ const format = function capitalizeFirstWord(description) {
 
 const addGif = function fetchGif(image, style) {
   fetch(
-    `https://api.giphy.com/v1/gifs/translate?api_key=umcSu4OKde9HxKB2XzPu3WrecdvJqniu&s=${style}`,
+    `https://api.giphy.com/v1/gifs/translate?api_key=umcSu4OKde9HxKB2XzPu3WrecdvJqniu&s=${style}&weirdness=5`,
     {
       mode: "cors",
     }
@@ -78,6 +78,12 @@ const chooseStyle = function styleChoose(description) {
       break;
     case description.includes("clear"):
       imageStyle = "sunny#weather";
+      break;
+    case description.includes("haze"):
+      imageStyle = "foggy#weather";
+      break;
+    default:
+      imageStyle = "weather+man#weather";
       break;
   }
   return imageStyle;

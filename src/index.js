@@ -21,7 +21,10 @@ form.addEventListener("submit", (e) => {
 const submitButton = document.querySelector(".submit-button");
 submitButton.addEventListener("click", () => {
   clearDisplay();
+  displayWeather();
+});
 
+const displayWeather = function displayDailyAndFiveDay() {
   const locationField = document.querySelector(".location");
   const location = locationField.value;
   console.log(location);
@@ -53,4 +56,4 @@ submitButton.addEventListener("click", () => {
    * Use array of forecast objects to display 5-day forecast
    */
   forecast.then((result) => displayFiveDay(result));
-});
+};

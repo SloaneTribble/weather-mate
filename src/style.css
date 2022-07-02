@@ -1,6 +1,46 @@
+html,
+body{
+    box-sizing: border-box;
+}
+
+body{
+    min-height: 100vh;
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+}
+
+*,
+*:before,
+*:after{
+    box-sizing: inherit;
+    margin: 0;
+}
+
+.main-container{
+    min-height: 100vh;
+    max-height: 100vh;
+    height: 100%;
+    flex: 1;
+    min-width: 100vw;
+    max-width: 100vw;
+    display: grid;
+    grid-template-rows: 1fr 6fr 3fr 1fr;
+}
+
+
 .header{
-    height: 1rem;
+    height: 100%;
     background-color: blue;
+    display: grid;
+}
+
+.form{
+    display: grid;
+}
+
+.error-bar{
+    height: 1rem;
 }
 
 .daily-forecast-container{
@@ -9,4 +49,19 @@
 
 .five-day-forecast-container{
     background-color:aquamarine;
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+}
+
+.day-container{
+    width: 100%;
+    max-width: 100%;
+}
+
+.five-day-img-container{
+    width: 80%;
+}
+
+.five-day-img{
+    max-width: 100%;
 }

@@ -21,7 +21,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_1___default()((_node_modules_css_loader_dist_runtime_sourceMaps_js__WEBPACK_IMPORTED_MODULE_0___default()));
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, ".header{\n    height: 1rem;\n    background-color: blue;\n}\n\n.daily-forecast-container{\n    background-color: beige;\n}\n\n.five-day-forecast-container{\n    background-color:aquamarine;\n}", "",{"version":3,"sources":["webpack://./src/style.css"],"names":[],"mappings":"AAAA;IACI,YAAY;IACZ,sBAAsB;AAC1B;;AAEA;IACI,uBAAuB;AAC3B;;AAEA;IACI,2BAA2B;AAC/B","sourcesContent":[".header{\n    height: 1rem;\n    background-color: blue;\n}\n\n.daily-forecast-container{\n    background-color: beige;\n}\n\n.five-day-forecast-container{\n    background-color:aquamarine;\n}"],"sourceRoot":""}]);
+___CSS_LOADER_EXPORT___.push([module.id, "html,\nbody{\n    box-sizing: border-box;\n}\n\nbody{\n    min-height: 100vh;\n    display: flex;\n    flex: 1;\n    flex-direction: column;\n}\n\n*,\n*:before,\n*:after{\n    box-sizing: inherit;\n    margin: 0;\n}\n\n.main-container{\n    min-height: 100vh;\n    max-height: 100vh;\n    height: 100%;\n    flex: 1;\n    min-width: 100vw;\n    max-width: 100vw;\n    display: grid;\n    grid-template-rows: 1fr 6fr 3fr 1fr;\n}\n\n\n.header{\n    height: 100%;\n    background-color: blue;\n    display: grid;\n}\n\n.form{\n    display: grid;\n}\n\n.error-bar{\n    height: 1rem;\n}\n\n.daily-forecast-container{\n    background-color: beige;\n}\n\n.five-day-forecast-container{\n    background-color:aquamarine;\n    display: grid;\n    grid-template-columns: repeat(5, 1fr);\n}\n\n.day-container{\n    width: 100%;\n    max-width: 100%;\n}\n\n.five-day-img-container{\n    width: 80%;\n}\n\n.five-day-img{\n    max-width: 100%;\n}", "",{"version":3,"sources":["webpack://./src/style.css"],"names":[],"mappings":"AAAA;;IAEI,sBAAsB;AAC1B;;AAEA;IACI,iBAAiB;IACjB,aAAa;IACb,OAAO;IACP,sBAAsB;AAC1B;;AAEA;;;IAGI,mBAAmB;IACnB,SAAS;AACb;;AAEA;IACI,iBAAiB;IACjB,iBAAiB;IACjB,YAAY;IACZ,OAAO;IACP,gBAAgB;IAChB,gBAAgB;IAChB,aAAa;IACb,mCAAmC;AACvC;;;AAGA;IACI,YAAY;IACZ,sBAAsB;IACtB,aAAa;AACjB;;AAEA;IACI,aAAa;AACjB;;AAEA;IACI,YAAY;AAChB;;AAEA;IACI,uBAAuB;AAC3B;;AAEA;IACI,2BAA2B;IAC3B,aAAa;IACb,qCAAqC;AACzC;;AAEA;IACI,WAAW;IACX,eAAe;AACnB;;AAEA;IACI,UAAU;AACd;;AAEA;IACI,eAAe;AACnB","sourcesContent":["html,\nbody{\n    box-sizing: border-box;\n}\n\nbody{\n    min-height: 100vh;\n    display: flex;\n    flex: 1;\n    flex-direction: column;\n}\n\n*,\n*:before,\n*:after{\n    box-sizing: inherit;\n    margin: 0;\n}\n\n.main-container{\n    min-height: 100vh;\n    max-height: 100vh;\n    height: 100%;\n    flex: 1;\n    min-width: 100vw;\n    max-width: 100vw;\n    display: grid;\n    grid-template-rows: 1fr 6fr 3fr 1fr;\n}\n\n\n.header{\n    height: 100%;\n    background-color: blue;\n    display: grid;\n}\n\n.form{\n    display: grid;\n}\n\n.error-bar{\n    height: 1rem;\n}\n\n.daily-forecast-container{\n    background-color: beige;\n}\n\n.five-day-forecast-container{\n    background-color:aquamarine;\n    display: grid;\n    grid-template-columns: repeat(5, 1fr);\n}\n\n.day-container{\n    width: 100%;\n    max-width: 100%;\n}\n\n.five-day-img-container{\n    width: 80%;\n}\n\n.five-day-img{\n    max-width: 100%;\n}"],"sourceRoot":""}]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -4018,8 +4018,6 @@ const displayDaily = function displayDailyForecast(forecastObject) {
   container.appendChild(min);
   container.appendChild(max);
   container.appendChild(image);
-
-  document.body.appendChild(container);
 };
 
 const format = function capitalizeFirstWord(description) {
@@ -4114,21 +4112,25 @@ const displayFiveDay = function displayFiveDayForecast(forecastArray) {
     day.textContent = forecast.date;
 
     const overview = document.createElement("img");
+    overview.classList.add("five-day-img");
     const description = forecast.description;
     console.log(description);
     overview.src = choosePicture(description);
+
+    const imageContainer = document.createElement("div");
+    imageContainer.classList.add("five-day-img-container");
+
+    imageContainer.appendChild(overview);
 
     const avgTemp = document.createElement("div");
     avgTemp.textContent = forecast.temp + "\xB0";
 
     dayContainer.appendChild(day);
-    dayContainer.appendChild(overview);
+    dayContainer.appendChild(imageContainer);
     dayContainer.appendChild(avgTemp);
 
     fiveDayContainer.appendChild(dayContainer);
   }
-
-  document.body.appendChild(fiveDayContainer);
 
   return;
 };
@@ -4247,16 +4249,19 @@ const makeForm = function formMaker() {
   celsius.value = "celsius";
   celsius.id = "celsius";
 
+  const tempContainer = document.createElement("div");
+  tempContainer.appendChild(fLabel);
+  tempContainer.appendChild(fahrenheit);
+  tempContainer.appendChild(cLabel);
+  tempContainer.appendChild(celsius);
+
   const submit = document.createElement("button");
   submit.classList.add("submit-button");
   submit.type = "submit";
   submit.textContent = "Submit";
 
   form.appendChild(location);
-  form.appendChild(fLabel);
-  form.appendChild(fahrenheit);
-  form.appendChild(cLabel);
-  form.appendChild(celsius);
+  form.appendChild(tempContainer);
   form.appendChild(submit);
 
   return form;

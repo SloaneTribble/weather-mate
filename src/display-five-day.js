@@ -21,21 +21,25 @@ const displayFiveDay = function displayFiveDayForecast(forecastArray) {
     day.textContent = forecast.date;
 
     const overview = document.createElement("img");
+    overview.classList.add("five-day-img");
     const description = forecast.description;
     console.log(description);
     overview.src = choosePicture(description);
+
+    const imageContainer = document.createElement("div");
+    imageContainer.classList.add("five-day-img-container");
+
+    imageContainer.appendChild(overview);
 
     const avgTemp = document.createElement("div");
     avgTemp.textContent = forecast.temp + "\xB0";
 
     dayContainer.appendChild(day);
-    dayContainer.appendChild(overview);
+    dayContainer.appendChild(imageContainer);
     dayContainer.appendChild(avgTemp);
 
     fiveDayContainer.appendChild(dayContainer);
   }
-
-  document.body.appendChild(fiveDayContainer);
 
   return;
 };

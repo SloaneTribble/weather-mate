@@ -36,8 +36,6 @@ const displayDaily = function displayDailyForecast(forecastObject) {
   container.appendChild(min);
   container.appendChild(max);
   container.appendChild(image);
-
-  document.body.appendChild(container);
 };
 
 const format = function capitalizeFirstWord(description) {

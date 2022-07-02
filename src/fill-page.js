@@ -65,16 +65,19 @@ const makeForm = function formMaker() {
   celsius.value = "celsius";
   celsius.id = "celsius";
 
+  const tempContainer = document.createElement("div");
+  tempContainer.appendChild(fLabel);
+  tempContainer.appendChild(fahrenheit);
+  tempContainer.appendChild(cLabel);
+  tempContainer.appendChild(celsius);
+
   const submit = document.createElement("button");
   submit.classList.add("submit-button");
   submit.type = "submit";
   submit.textContent = "Submit";
 
   form.appendChild(location);
-  form.appendChild(fLabel);
-  form.appendChild(fahrenheit);
-  form.appendChild(cLabel);
-  form.appendChild(celsius);
+  form.appendChild(tempContainer);
   form.appendChild(submit);
 
   return form;

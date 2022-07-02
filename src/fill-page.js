@@ -49,7 +49,7 @@ const makeForm = function formMaker() {
   location.classList.add("location");
   location.type = "text";
   location.name = "location";
-  location.placeholder = "Location ([City], [City, State], [City, Country])";
+  location.placeholder = "Location";
 
   const fLabel = document.createElement("label");
   fLabel.htmlFor = "fahrenheit";

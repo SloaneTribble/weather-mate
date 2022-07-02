@@ -14,8 +14,11 @@ const displayDaily = function displayDailyForecast(forecastObject) {
 
   let imageStyle = chooseStyle(forecastObject.overview);
 
+  const imageContainer = document.createElement("div");
+  imageContainer.classList.add("daily-image-container");
+
   const image = document.createElement("img");
-  image.classList.add("weather-image");
+  image.classList.add("daily-image");
   addGif(image, imageStyle);
 
   const temp = document.createElement("div");
@@ -30,12 +33,19 @@ const displayDaily = function displayDailyForecast(forecastObject) {
   const max = document.createElement("div");
   max.textContent = `High: ${forecastObject.maxTemp}\xB0`;
 
-  container.appendChild(description);
-  container.appendChild(temp);
-  container.appendChild(feeling);
-  container.appendChild(min);
-  container.appendChild(max);
-  container.appendChild(image);
+  const statsContainer = document.createElement("div");
+  statsContainer.classList.add("daily-stats-container");
+
+  imageContainer.appendChild(image);
+
+  statsContainer.appendChild(description);
+  statsContainer.appendChild(temp);
+  statsContainer.appendChild(feeling);
+  statsContainer.appendChild(min);
+  statsContainer.appendChild(max);
+
+  container.appendChild(statsContainer);
+  container.appendChild(imageContainer);
 };
 
 const format = function capitalizeFirstWord(description) {

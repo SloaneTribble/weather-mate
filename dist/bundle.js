@@ -20,8 +20,9 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_1___default()((_node_modules_css_loader_dist_runtime_sourceMaps_js__WEBPACK_IMPORTED_MODULE_0___default()));
+___CSS_LOADER_EXPORT___.push([module.id, "@import url(https://fonts.googleapis.com/css2?family=Righteous&display=swap);"]);
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "html,\nbody{\n    box-sizing: border-box;\n}\n\nbody{\n    min-height: 100vh;\n    display: flex;\n    flex: 1;\n    flex-direction: column;\n}\n\n*,\n*:before,\n*:after{\n    box-sizing: inherit;\n    margin: 0;\n}\n\n.main-container{\n    min-height: 100vh;\n    max-height: 100vh;\n    height: 100%;\n    flex: 1;\n    min-width: 100vw;\n    max-width: 100vw;\n    display: grid;\n    grid-template-rows: 1fr 6fr 3fr 1fr;\n}\n\n\n.header{\n    height: 100%;\n    background-color: blue;\n    display: grid;\n}\n\n.form{\n    display: grid;\n}\n\n.error-bar{\n    height: 1rem;\n}\n\n.daily-forecast-container{\n    background-color: beige;\n}\n\n.five-day-forecast-container{\n    background-color:aquamarine;\n    display: grid;\n    grid-template-columns: repeat(5, 1fr);\n}\n\n.day-container{\n    width: 100%;\n    max-width: 100%;\n}\n\n.five-day-img-container{\n    width: 80%;\n}\n\n.five-day-img{\n    max-width: 100%;\n}", "",{"version":3,"sources":["webpack://./src/style.css"],"names":[],"mappings":"AAAA;;IAEI,sBAAsB;AAC1B;;AAEA;IACI,iBAAiB;IACjB,aAAa;IACb,OAAO;IACP,sBAAsB;AAC1B;;AAEA;;;IAGI,mBAAmB;IACnB,SAAS;AACb;;AAEA;IACI,iBAAiB;IACjB,iBAAiB;IACjB,YAAY;IACZ,OAAO;IACP,gBAAgB;IAChB,gBAAgB;IAChB,aAAa;IACb,mCAAmC;AACvC;;;AAGA;IACI,YAAY;IACZ,sBAAsB;IACtB,aAAa;AACjB;;AAEA;IACI,aAAa;AACjB;;AAEA;IACI,YAAY;AAChB;;AAEA;IACI,uBAAuB;AAC3B;;AAEA;IACI,2BAA2B;IAC3B,aAAa;IACb,qCAAqC;AACzC;;AAEA;IACI,WAAW;IACX,eAAe;AACnB;;AAEA;IACI,UAAU;AACd;;AAEA;IACI,eAAe;AACnB","sourcesContent":["html,\nbody{\n    box-sizing: border-box;\n}\n\nbody{\n    min-height: 100vh;\n    display: flex;\n    flex: 1;\n    flex-direction: column;\n}\n\n*,\n*:before,\n*:after{\n    box-sizing: inherit;\n    margin: 0;\n}\n\n.main-container{\n    min-height: 100vh;\n    max-height: 100vh;\n    height: 100%;\n    flex: 1;\n    min-width: 100vw;\n    max-width: 100vw;\n    display: grid;\n    grid-template-rows: 1fr 6fr 3fr 1fr;\n}\n\n\n.header{\n    height: 100%;\n    background-color: blue;\n    display: grid;\n}\n\n.form{\n    display: grid;\n}\n\n.error-bar{\n    height: 1rem;\n}\n\n.daily-forecast-container{\n    background-color: beige;\n}\n\n.five-day-forecast-container{\n    background-color:aquamarine;\n    display: grid;\n    grid-template-columns: repeat(5, 1fr);\n}\n\n.day-container{\n    width: 100%;\n    max-width: 100%;\n}\n\n.five-day-img-container{\n    width: 80%;\n}\n\n.five-day-img{\n    max-width: 100%;\n}"],"sourceRoot":""}]);
+___CSS_LOADER_EXPORT___.push([module.id, "html,\nbody{\n    box-sizing: border-box;\n\n}\n\nbody{\n    min-height: 100vh;\n    max-height: 100vh;\n    display: flex;\n    flex: 1;\n    flex-direction: column;\n}\n\n*,\n*:before,\n*:after{\n    box-sizing: inherit;\n    margin: 0;\n    font-family: 'Righteous', cursive;\n}\n\n.main-container{\n    min-height: 100vh;\n    max-height: 100vh;\n    height: 100%;\n    flex: 1;\n    min-width: 100vw;\n    max-width: 100vw;\n    display: grid;\n    grid-template-rows: 1fr 6fr 3fr 1fr;\n}\n\n/* Begin header */\n\n.header{\n    height: 100%;\n    background-color: blue;\n    display: grid;\n    padding: 0 15%;\n}\n\n.title{\n    height: 2.4rem;\n    font-size: 1.7rem;\n    padding-top: .3rem;;\n}\n\n.form{\n    display: grid;\n    grid-template-rows: 1.4fr 1fr;\n    justify-items: center;\n    row-gap: 5px;\n}\n\n.location{\n    grid-row: 1;\n    grid-column: 1/ 3;\n    width: 100%;\n    font-size: 1.2rem;\n}\n\n.temp-container{\n    grid-row: 2;\n    justify-self: start;\n}\n\ninput[type=\"radio\"]{\n    width: 1.2rem;\n}\n\n.submit-button{\n    grid-row: 2;\n    justify-self: end;\n}\n\n.error-bar{\n    height: 1.3rem;\n}\n\n/* End header */\n\n/* Begin daily forecast */\n\n.daily-forecast-container{\n    background-color: beige;\n}\n\n/* End daily forecast */\n\n/* Begin five-day forecast */\n\n.five-day-forecast-container{\n    background-color:aquamarine;\n    display: grid;\n    grid-template-columns: repeat(5, 1fr);\n}\n\n.day-container{\n    width: 100%;\n    max-width: 100%;\n}\n\n.five-day-img-container{\n    width: 80%;\n}\n\n.five-day-img{\n    max-width: 100%;\n}", "",{"version":3,"sources":["webpack://./src/style.css"],"names":[],"mappings":"AAEA;;IAEI,sBAAsB;;AAE1B;;AAEA;IACI,iBAAiB;IACjB,iBAAiB;IACjB,aAAa;IACb,OAAO;IACP,sBAAsB;AAC1B;;AAEA;;;IAGI,mBAAmB;IACnB,SAAS;IACT,iCAAiC;AACrC;;AAEA;IACI,iBAAiB;IACjB,iBAAiB;IACjB,YAAY;IACZ,OAAO;IACP,gBAAgB;IAChB,gBAAgB;IAChB,aAAa;IACb,mCAAmC;AACvC;;AAEA,iBAAiB;;AAEjB;IACI,YAAY;IACZ,sBAAsB;IACtB,aAAa;IACb,cAAc;AAClB;;AAEA;IACI,cAAc;IACd,iBAAiB;IACjB,kBAAkB;AACtB;;AAEA;IACI,aAAa;IACb,6BAA6B;IAC7B,qBAAqB;IACrB,YAAY;AAChB;;AAEA;IACI,WAAW;IACX,iBAAiB;IACjB,WAAW;IACX,iBAAiB;AACrB;;AAEA;IACI,WAAW;IACX,mBAAmB;AACvB;;AAEA;IACI,aAAa;AACjB;;AAEA;IACI,WAAW;IACX,iBAAiB;AACrB;;AAEA;IACI,cAAc;AAClB;;AAEA,eAAe;;AAEf,yBAAyB;;AAEzB;IACI,uBAAuB;AAC3B;;AAEA,uBAAuB;;AAEvB,4BAA4B;;AAE5B;IACI,2BAA2B;IAC3B,aAAa;IACb,qCAAqC;AACzC;;AAEA;IACI,WAAW;IACX,eAAe;AACnB;;AAEA;IACI,UAAU;AACd;;AAEA;IACI,eAAe;AACnB","sourcesContent":["@import url('https://fonts.googleapis.com/css2?family=Righteous&display=swap');\n\nhtml,\nbody{\n    box-sizing: border-box;\n\n}\n\nbody{\n    min-height: 100vh;\n    max-height: 100vh;\n    display: flex;\n    flex: 1;\n    flex-direction: column;\n}\n\n*,\n*:before,\n*:after{\n    box-sizing: inherit;\n    margin: 0;\n    font-family: 'Righteous', cursive;\n}\n\n.main-container{\n    min-height: 100vh;\n    max-height: 100vh;\n    height: 100%;\n    flex: 1;\n    min-width: 100vw;\n    max-width: 100vw;\n    display: grid;\n    grid-template-rows: 1fr 6fr 3fr 1fr;\n}\n\n/* Begin header */\n\n.header{\n    height: 100%;\n    background-color: blue;\n    display: grid;\n    padding: 0 15%;\n}\n\n.title{\n    height: 2.4rem;\n    font-size: 1.7rem;\n    padding-top: .3rem;;\n}\n\n.form{\n    display: grid;\n    grid-template-rows: 1.4fr 1fr;\n    justify-items: center;\n    row-gap: 5px;\n}\n\n.location{\n    grid-row: 1;\n    grid-column: 1/ 3;\n    width: 100%;\n    font-size: 1.2rem;\n}\n\n.temp-container{\n    grid-row: 2;\n    justify-self: start;\n}\n\ninput[type=\"radio\"]{\n    width: 1.2rem;\n}\n\n.submit-button{\n    grid-row: 2;\n    justify-self: end;\n}\n\n.error-bar{\n    height: 1.3rem;\n}\n\n/* End header */\n\n/* Begin daily forecast */\n\n.daily-forecast-container{\n    background-color: beige;\n}\n\n/* End daily forecast */\n\n/* Begin five-day forecast */\n\n.five-day-forecast-container{\n    background-color:aquamarine;\n    display: grid;\n    grid-template-columns: repeat(5, 1fr);\n}\n\n.day-container{\n    width: 100%;\n    max-width: 100%;\n}\n\n.five-day-img-container{\n    width: 80%;\n}\n\n.five-day-img{\n    max-width: 100%;\n}"],"sourceRoot":""}]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -4211,10 +4212,18 @@ const makeHeader = function headerMaker() {
   const header = document.createElement("div");
   header.classList.add("header");
 
+  header.appendChild(makeTitle());
   header.appendChild(makeForm());
-  header.appendChild(makeErrorBar());
 
   return header;
+};
+
+const makeTitle = function titleMaker() {
+  const title = document.createElement("div");
+  title.classList.add("title");
+  title.textContent = "Weather Mate";
+
+  return title;
 };
 
 const makeForm = function formMaker() {
@@ -4250,6 +4259,7 @@ const makeForm = function formMaker() {
   celsius.id = "celsius";
 
   const tempContainer = document.createElement("div");
+  tempContainer.classList.add("temp-container");
   tempContainer.appendChild(fLabel);
   tempContainer.appendChild(fahrenheit);
   tempContainer.appendChild(cLabel);
@@ -4265,13 +4275,6 @@ const makeForm = function formMaker() {
   form.appendChild(submit);
 
   return form;
-};
-
-const makeErrorBar = function errorHolder() {
-  const errorBar = document.createElement("div");
-  errorBar.classList.add("error-bar");
-
-  return errorBar;
 };
 
 const makeDaily = function makeDailyForecastContainer() {
@@ -4343,18 +4346,14 @@ async function getWeather(input, units) {
 
     return { latitude, longitude, overview, avgTemp, feel, minTemp, maxTemp };
   } catch (error) {
-    const errorBar = document.querySelector(".error-bar");
-    errorBar.textContent =
-      'Please make sure you enter location in the following format: "City", "City, State", "City, Country", or "City, State, Country"';
+    alert(
+      "Please check format: {City}, {City, State}, {City, Country}, or {City, State, Country}"
+    );
     return;
   }
 }
 
 async function getForecast(latitude, longitude, units) {
-  // If this function is reached, then location was successfully found and there are no errors
-  const errorBar = document.querySelector(".error-bar");
-  errorBar.textContent = "";
-
   const forecast = await fetch(
     `https://api.openweathermap.org/data/2.5/forecast?lat=${latitude}&lon=${longitude}&appid=127129261617cbfa5cf75835b41e98fa&units=${units}`,
     { mode: "cors" }

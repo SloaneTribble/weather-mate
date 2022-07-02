@@ -35,18 +35,14 @@ async function getWeather(input, units) {
 
     return { latitude, longitude, overview, avgTemp, feel, minTemp, maxTemp };
   } catch (error) {
-    const errorBar = document.querySelector(".error-bar");
-    errorBar.textContent =
-      'Please make sure you enter location in the following format: "City", "City, State", "City, Country", or "City, State, Country"';
+    alert(
+      "Please check format: {City}, {City, State}, {City, Country}, or {City, State, Country}"
+    );
     return;
   }
 }
 
 async function getForecast(latitude, longitude, units) {
-  // If this function is reached, then location was successfully found and there are no errors
-  const errorBar = document.querySelector(".error-bar");
-  errorBar.textContent = "";
-
   const forecast = await fetch(
     `https://api.openweathermap.org/data/2.5/forecast?lat=${latitude}&lon=${longitude}&appid=127129261617cbfa5cf75835b41e98fa&units=${units}`,
     { mode: "cors" }

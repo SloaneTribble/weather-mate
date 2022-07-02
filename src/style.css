@@ -1,10 +1,14 @@
+@import url('https://fonts.googleapis.com/css2?family=Righteous&display=swap');
+
 html,
 body{
     box-sizing: border-box;
+
 }
 
 body{
     min-height: 100vh;
+    max-height: 100vh;
     display: flex;
     flex: 1;
     flex-direction: column;
@@ -15,6 +19,7 @@ body{
 *:after{
     box-sizing: inherit;
     margin: 0;
+    font-family: 'Righteous', cursive;
 }
 
 .main-container{
@@ -28,24 +33,64 @@ body{
     grid-template-rows: 1fr 6fr 3fr 1fr;
 }
 
+/* Begin header */
 
 .header{
     height: 100%;
     background-color: blue;
     display: grid;
+    padding: 0 15%;
+}
+
+.title{
+    height: 2.4rem;
+    font-size: 1.7rem;
+    padding-top: .3rem;;
 }
 
 .form{
     display: grid;
+    grid-template-rows: 1.4fr 1fr;
+    justify-items: center;
+    row-gap: 5px;
+}
+
+.location{
+    grid-row: 1;
+    grid-column: 1/ 3;
+    width: 100%;
+    font-size: 1.2rem;
+}
+
+.temp-container{
+    grid-row: 2;
+    justify-self: start;
+}
+
+input[type="radio"]{
+    width: 1.2rem;
+}
+
+.submit-button{
+    grid-row: 2;
+    justify-self: end;
 }
 
 .error-bar{
-    height: 1rem;
+    height: 1.3rem;
 }
+
+/* End header */
+
+/* Begin daily forecast */
 
 .daily-forecast-container{
     background-color: beige;
 }
+
+/* End daily forecast */
+
+/* Begin five-day forecast */
 
 .five-day-forecast-container{
     background-color:aquamarine;

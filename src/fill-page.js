@@ -27,10 +27,18 @@ const makeHeader = function headerMaker() {
   const header = document.createElement("div");
   header.classList.add("header");
 
+  header.appendChild(makeTitle());
   header.appendChild(makeForm());
-  header.appendChild(makeErrorBar());
 
   return header;
+};
+
+const makeTitle = function titleMaker() {
+  const title = document.createElement("div");
+  title.classList.add("title");
+  title.textContent = "Weather Mate";
+
+  return title;
 };
 
 const makeForm = function formMaker() {
@@ -66,6 +74,7 @@ const makeForm = function formMaker() {
   celsius.id = "celsius";
 
   const tempContainer = document.createElement("div");
+  tempContainer.classList.add("temp-container");
   tempContainer.appendChild(fLabel);
   tempContainer.appendChild(fahrenheit);
   tempContainer.appendChild(cLabel);
@@ -81,13 +90,6 @@ const makeForm = function formMaker() {
   form.appendChild(submit);
 
   return form;
-};
-
-const makeErrorBar = function errorHolder() {
-  const errorBar = document.createElement("div");
-  errorBar.classList.add("error-bar");
-
-  return errorBar;
 };
 
 const makeDaily = function makeDailyForecastContainer() {

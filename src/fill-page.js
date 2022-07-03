@@ -9,9 +9,12 @@ const fillPage = function populateBodyWithDivs() {
 
   const fiveDay = makeFiveDay();
 
+  const footer = makeFooter();
+
   mainContainer.appendChild(header);
   mainContainer.appendChild(daily);
   mainContainer.appendChild(fiveDay);
+  mainContainer.appendChild(footer);
 
   document.body.appendChild(mainContainer);
 };
@@ -104,6 +107,15 @@ const makeFiveDay = function makeFiveDayForecastContainer() {
   fiveDayContainer.classList.add("five-day-forecast-container");
 
   return fiveDayContainer;
+};
+
+const makeFooter = function footerMaker() {
+  const footer = document.createElement("div");
+  footer.classList.add("footer");
+  footer.innerHTML =
+    "<a href='https://github.com/SloaneTribble'>Sloane Tribble</a> <a href='https://www.flaticon.com/free-icons/sun' title='sun icons'>Icons created by Freepik - Flaticon</a>";
+
+  return footer;
 };
 
 export { fillPage };

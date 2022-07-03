@@ -31,7 +31,7 @@ body{
     min-width: 100vw;
     max-width: 100vw;
     display: grid;
-    grid-template-rows: 1fr 7fr 2.5fr 1fr;
+    grid-template-rows: 1.3fr 7fr 2.5fr .8fr;
 }
 
 /* Begin header */
@@ -45,15 +45,16 @@ body{
 
 .title{
     height: 2.4rem;
-    font-size: 1.7rem;
-    padding-top: .3rem;;
+    font-size: 1.95rem;
+    padding-top: .3rem;
 }
 
 .form{
     display: grid;
     grid-template-rows: 1.4fr 1fr;
     justify-items: center;
-    row-gap: 5px;
+    row-gap: .1rem;
+    padding-bottom: 3px;
 }
 
 .location{
@@ -61,11 +62,13 @@ body{
     grid-column: 1/ 3;
     width: 100%;
     font-size: 1.2rem;
+    padding-left: .2rem;
 }
 
 .temp-container{
     grid-row: 2;
     justify-self: start;
+    padding-left: .2rem;
 }
 
 input[type="radio"]{
@@ -89,50 +92,32 @@ input[type="radio"]{
     min-height: 100%;
     height: 100%;
     background-color: beige;
-    display: flex;
-    flex-direction: column;
+    display: grid;
+    grid-template-rows: 2.5fr 7fr;
     align-items: center;
-    justify-content: center;
-    flex: 1;
 }
 
 .daily-stats-container{
-    padding-bottom: .3rem;
+    font-size: 1.25rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 5.3rem;
     justify-self: center;
 }
 
 .daily-image-container{
+    max-height: 90%;
+    height: 90%;
     margin-left: auto;
     margin-right: auto;
-    max-width: 80%;
-    max-height: 90%;
-    flex: 1;
-    justify-content: center;
-    align-self: center;
-    align-content: center;
     overflow: hidden;
+    display: flex;
 }
 
 .daily-image{
-    margin-left: auto;
-    margin-right: auto;
-    max-height: 100%;
     align-self: center;
-    justify-self: center;
-    width: auto;
-    flex: 1;
-    overflow: hidden;
-}
-
-.daily-image >img {
-    margin-left: auto;
-    margin-right: auto;
-    align-self: center;
-    justify-self: center;
-    max-height: 80%;
-    max-width: 100%;
-    flex: 1;
-    overflow: hidden;
+    height: 100%;
 }
 
 /* End daily forecast */
@@ -140,11 +125,14 @@ input[type="radio"]{
 /* Begin five-day forecast */
 
 .five-day-forecast-container{
+    grid-row: 3 / 4;
     background-color:aquamarine;
     display: grid;
     height: fit-content;
+    grid-template-rows: 1fr;
     grid-template-columns: repeat(5, 1fr);
-    max-height: 20vh;
+    min-height: 100%;
+    max-height: 100%;
 }
 
 .day-container{
@@ -152,18 +140,21 @@ input[type="radio"]{
     flex-direction: column;
     flex: 1;
     min-height: 10vh;
-    max-height: 20vh;
+    max-height: 100%;
+    justify-content: center;
+    align-items: center;
 }
 
 .five-day-img-container{
-    max-height: 100%;
+    max-height: 70%;
     max-width: 100%;
     display: flex;
     flex: 1;
+
 }
 
 .five-day-img-container > img{
-    max-height: 15vh;
+    max-height: 100%;
     max-width: 100%;
 }
 

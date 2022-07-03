@@ -9,6 +9,7 @@ module.exports = {
   plugins: [
     new HtmlWebpackPlugin({
       title: "Weather Mate",
+      favicon: "./src/images/favicon.ico",
     }),
   ],
   entry: "./src/index.js",
